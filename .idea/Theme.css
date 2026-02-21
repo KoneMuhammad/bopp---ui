@@ -1,0 +1,17 @@
+:root {
+    /* Backgrounds - light mode */
+    --light-mode-bg:         #E6E6E6;
+    --light-mode-bg-element: #F2F2F2;
+    --light-mode-bg-inner:   #FFFFFF;
+
+    /* Accent */
+    --accent: #2795D0;
+
+    /* Shadow - light mode */
+    --light-mode-shadow: #BFBFBF;
+
+    /* Text - light mode */
+    --light-mode-text-1: #0D0D0D;
+    --light-mode-text-2: #404040;
+    --light-mode-text-3: #666666;
+}
