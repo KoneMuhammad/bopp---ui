@@ -7,11 +7,19 @@
     /* Accent */
     --accent: #2795D0;
 
-    /* Shadow - light mode */
-    --light-mode-shadow: #BFBFBF;
-
     /* Text - light mode */
     --light-mode-text-1: #0D0D0D;
     --light-mode-text-2: #404040;
     --light-mode-text-3: #666666;
+
+    /* Text Size - light mode */
+    --text-size-1: 68px;
+    --text-size-2: 64px;
+
+    /* dropshadow - light mode */
+    --light-mode-drop-shadow: #CCCCCC;
+
+    /* full outline - light mode */
+    --light-mode-outline:         #E6E6E6;
+    --light-mode-outline_top:     #FFFFFF;
 }

@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bopp</title>
+    <link rel="stylesheet" href="theme.css">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #e0e0e0;
+            background: var(--light-mode-bg);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,13 +30,13 @@
         .left h1 {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #111;
+            color: var(--light-mode-text-1);
             margin-bottom: 1.5rem;
         }
 
         .left .tagline {
             font-size: 1rem;
-            color: #333;
+            color: var(--light-mode-text-2);
             margin-bottom: 0.75rem;
         }
 
@@ -48,11 +49,11 @@
 
         .left ul li {
             font-size: 0.95rem;
-            color: #666;
+            color: var(--light-mode-text-3);
         }
 
         .card {
-            background: #ebebeb;
+            background: var(--light-mode-bg-element);
             border-radius: 16px;
             padding: 2.5rem 2rem;
             display: flex;
@@ -60,12 +61,12 @@
             align-items: center;
             gap: 1.25rem;
             min-width: 260px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px var(--light-mode-drop-shadow);
         }
 
         .card-title {
             font-size: 1.2rem;
-            color: #222;
+            color: var(--light-mode-text-1);
             font-weight: 400;
         }
 
@@ -73,19 +74,19 @@
             width: 100%;
             padding: 0.75rem 1rem;
             border-radius: 8px;
-            border: 1.5px solid #ccc;
+            border: 1.5px solid var(--light-mode-outline);
             font-size: 0.95rem;
             outline: none;
-            background: #fff;
+            background: var(--light-mode-bg-inner);
             display: none;
         }
 
-        .email-input:focus { border-color: #3b9eff; }
+        .email-input:focus { border-color: var(--accent); }
 
         .btn {
             width: 100%;
-            background: #3b9eff;
-            color: #fff;
+            background: var(--accent);
+            color: var(--light-mode-bg-inner);
             border: none;
             border-radius: 10px;
             padding: 0.85rem 1.5rem;
@@ -94,13 +95,13 @@
             cursor: pointer;
         }
 
-        .btn:hover { background: #2a8ef0; }
+        .btn:hover { filter: brightness(0.92); }
         .btn:active { transform: scale(0.98); }
 
         .success {
             display: none;
             text-align: center;
-            color: #444;
+            color: var(--light-mode-text-2);
             font-size: 0.95rem;
         }
 
@@ -147,7 +148,7 @@
         const email = input.value.trim();
         if (!email || !email.includes('@')) {
             input.style.borderColor = '#e05c5c';
-            setTimeout(() => { input.style.borderColor = '#ccc'; }, 1200);
+            setTimeout(() => { input.style.borderColor = ''; }, 1200);
             return;
         }
         btn.style.display = 'none';
