@@ -6,7 +6,21 @@
     <title>Bopp</title>
     <link rel="stylesheet" href="theme.css">
     <style>
+        header {
+            width: 100%;
+            height: 160px;
+            padding-left: 160px;
+            padding-right: 160px;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            background: #111;
+            color: white;
+        }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -112,6 +126,7 @@
     </style>
 </head>
 <body>
+<header> </header>
 <div class="page">
     <div class="left">
         <h1>your emails deserve to be better</h1>
@@ -139,7 +154,7 @@
     let clicked = false;
 
     btn.addEventListener('click', function() {
-        if (!clicked) {
+   if (!clicked) {
             input.style.display = 'block';
             input.focus();
             clicked = true;
