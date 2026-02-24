@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bopp — Emails, faster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-weight-medium: 300;
+            --font-weight-bold: 700;
+            --light-mode-bg:         #E6E6E6;
+            --light-mode-bg-element: #F2F2F2;
+            --light-mode-bg-inner:   #FFFFFF;
+            --accent: #2795D0;
+            --accent-light: #D6EEF8;
+            --light-mode-text-1: #0D0D0D;
+            --light-mode-text-2: #404040;
+            --light-mode-text-3: #666666;
+            --text-size-1: 40px;
+            --text-size-2: 37px;
+            --light-mode-drop-shadow: #CCCCCC;
+            --light-mode-outline:     #E6E6E6;
+            --light-mode-outline_top: #FFFFFF;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--light-mode-bg);
+            color: var(--light-mode-text-1);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 48px;
+            border-bottom: 1px solid var(--light-mode-outline);
+            background: var(--light-mode-bg-element);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 0 var(--light-mode-outline_top);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: var(--font-weight-bold);
+            letter-spacing: -0.5px;
+            color: var(--light-mode-text-1);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--light-mode-text-3);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--light-mode-text-1); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 10px 22px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(39,149,208,0.35);
+        }
+
+        /* HERO */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 69px);
+            align-items: center;
+            gap: 0;
+        }
+
+        .hero-left {
+            padding: 80px 64px 80px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            animation: fadeUp 0.7s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            width: fit-content;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        h1 {
+            font-size: var(--text-size-1);
+            font-weight: var(--font-weight-bold);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--light-mode-text-1);
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--light-mode-text-3);
+            max-width: 380px;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--light-mode-text-2);
+            font-weight: 400;
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.15s; }
+        .feature-item:nth-child(2) { animation-delay: 0.25s; }
+        .feature-item:nth-child(3) { animation-delay: 0.35s; }
+        .feature-item:nth-child(4) { animation-delay: 0.45s; }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .check svg {
+            width: 10px;
+            height: 10px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hero-ctas {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-large {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 14px 32px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-large:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(39,149,208,0.3);
+        }
+
+        .link-secondary {
+            font-size: 14px;
+            color: var(--light-mode-text-3);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .link-secondary:hover { color: var(--light-mode-text-1); }
+
+        /* HERO RIGHT — mock email client */
+        .hero-right {
+            padding: 48px 80px 48px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeUp 0.7s 0.2s ease both;
+        }
+
+        .email-mock {
+            background: var(--light-mode-bg-inner);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 32px var(--light-mode-drop-shadow), 0 2px 8px var(--light-mode-drop-shadow);
+            overflow: hidden;
+            border: 1px solid var(--light-mode-outline);
+        }
+
+        .email-header {
+            background: var(--light-mode-bg-element);
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--light-mode-outline);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot-row span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--light-mode-outline);
+        }
+
+        .email-title-bar {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: var(--light-mode-text-3);
+            font-weight: 400;
+        }
+
+        .email-body {
+            padding: 24px 24px 16px;
+        }
+
+        .email-from {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .email-meta strong {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--light-mode-text-1);
+        }
+
+        .email-meta span {
+            font-size: 12px;
+            color: var(--light-mode-text-3);
+        }
+
+        .email-subject {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--light-mode-text-1);
+            margin-bottom: 8px;
+        }
+
+        .email-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--light-mode-text-3);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .ai-bar {
+            margin: 20px 0 0;
+            padding: 14px 16px;
+            background: var(--accent-light);
+            border-radius: 12px;
+            border: 1px solid rgba(39,149,208,0.2);
+        }
+
+        .ai-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ai-label::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        .ai-replies {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ai-reply {
+            background: var(--light-mode-bg-inner);
+            border: 1px solid var(--light-mode-outline);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--light-mode-text-2);
+            cursor: pointer;
+            transition: all 0.15s;
+            line-height: 1.5;
+        }
+
+        .ai-reply:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(39,149,208,0.15);
+        }
+
+        .ai-reply.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(39,149,208,0.2);
+            color: var(--light-mode-text-1);
+        }
+
+        .email-footer {
+            padding: 14px 24px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-ghost {
+            background: var(--light-mode-bg-element);
+            border: 1px solid var(--light-mode-outline);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--light-mode-text-3);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-ghost:hover { border-color: var(--light-mode-text-2); color: var(--light-mode-text-1); }
+
+        .btn-send {
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-send:hover { filter: brightness(1.1); }
+
+        /* STATS ROW */
+        .stats {
+            display: flex;
+            gap: 0;
+            border-top: 1px solid var(--light-mode-outline);
+            background: var(--light-mode-bg-element);
+        }
+
+        .stat {
+            flex: 1;
+            padding: 28px 40px;
+            border-right: 1px solid var(--light-mode-outline);
+            text-align: center;
+        }
+        .stat:last-child { border-right: none; }
+
+        .stat-number {
+            font-size: var(--text-size-2);
+            font-weight: var(--font-weight-bold);
+            color: var(--light-mode-text-1);
+            letter-spacing: -1px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--light-mode-text-3);
+            margin-top: 4px;
+            font-weight: var(--font-weight-medium);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Bopp</div>
+    <div class="nav-right">
+        <a href="#" class="nav-link">Docs</a>
+        <a href="#" class="nav-link">Pricing</a>
+        <button class="btn-primary">Sign up free</button>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-left">
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            AI-powered email
+        </div>
+
+        <h1>Your emails<br>deserve to be<br><em>better.</em></h1>
+
+        <p class="hero-sub">Bopp reads your inbox and drafts perfect replies in seconds. Stop wrestling with words — just pick and send.</p>
+
+        <div class="features">
+            <div class="feature-item">
+                <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                Respond to emails in seconds
+            </div>
+            <div class="feature-item">
+                <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                Improve grammar automatically
+            </div>
+            <div class="feature-item">
+                <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                Pick the best response, every time
+            </div>
+            <div class="feature-item">
+                <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                Works across all your email accounts
+            </div>
+        </div>
+
+        <div class="hero-ctas">
+            <button class="btn-large">Get started free →</button>
+            <a href="#" class="link-secondary">See how it works ↗</a>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <div class="email-mock">
+            <div class="email-header">
+                <div class="dot-row">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="email-title-bar">Inbox — 3 unread</div>
+            </div>
+
+            <div class="email-body">
+                <div class="email-from">
+                    <div class="avatar">SJ</div>
+                    <div class="email-meta">
+                        <strong>Sarah Johnson</strong>
+                        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2c3e2d3e371f3e3c323a713c3032">[email&#160;protected]</a> · 2 min ago</span>
+                    </div>
+                </div>
+                <div class="email-subject">Re: Q4 proposal review</div>
+                <p class="email-text">Hey, just wanted to follow up on the proposal. Can we schedule a quick call this week to go over the numbers? Let me know what works for you.</p>
+
+                <div class="ai-bar">
+                    <div class="ai-label">Bopp suggests</div>
+                    <div class="ai-replies">
+                        <div class="ai-reply selected">Sure! Thursday at 2pm works great for me — does that suit you?</div>
+                        <div class="ai-reply">Happy to connect. I'm free Wednesday afternoon or Friday morning.</div>
+                        <div class="ai-reply">Thanks for following up. Let's do a quick 20-min call — I'll send a calendar invite.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-footer">
+                <button class="btn-ghost">Edit</button>
+                <button class="btn-send">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="stats">
+    <div class="stat">
+        <span class="stat-number">4s</span>
+        <div class="stat-label">avg. reply time</div>
+    </div>
+    <div class="stat">
+        <span class="stat-number">98%</span>
+        <div class="stat-label">grammar accuracy</div>
+    </div>
+    <div class="stat">
+        <span class="stat-number">3×</span>
+        <div class="stat-label">faster inbox zero</div>
+    </div>
+    <div class="stat">
+        <span class="stat-number">12k+</span>
+        <div class="stat-label">happy users</div>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Make AI reply cards interactive
+    document.querySelectorAll('.ai-reply')
