@@ -11,47 +11,51 @@
             height: 160px;
             padding-left: 160px;
             padding-right: 160px;
-
             display: flex;
             flex-direction: row;
-            align-items: center;
-
-            background: #111;
-            color: white;
+            background: var(--light-mode-bg-inner);
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--light-mode-bg);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
         .page {
             width: 100%;
-            max-width: 900px;
+            min-height: 100vh;
+            background: var(--light-mode-bg);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 3rem;
+            flex-direction: column;
+            gap: 90px;
         }
 
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 160px;
+            width: 100%;
+            height: 100%;
+            padding-left: 90px;
+            padding-right: 90px;
+            justify-content: space-between; /* pushes them to edges */
+
+        }
+
+        .container {
+            height: 1000px;
+            width: 950px;
+            flex-direction: column;
+            background: var(--light-mode-bg-element);
+
+        }
+
+        .left{
+            flex-direction: column;
+            margin-top: 100px;
+        }
         .left h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: var(--text-size-1);
+            font-weight: var(--font-weight-bold);
+            font-family: var(--font-family),sans-serif;
             color: var(--light-mode-text-1);
-            margin-bottom: 1.5rem;
-        }
-
-        .left .tagline {
-            font-size: 1rem;
-            color: var(--light-mode-text-2);
-            margin-bottom: 0.75rem;
+            margin-bottom: 31.18px;
         }
 
         .left ul {
@@ -62,62 +66,13 @@
         }
 
         .left ul li {
-            font-size: 0.95rem;
-            color: var(--light-mode-text-3);
-        }
-
-        .card {
-            background: var(--light-mode-bg-element);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.25rem;
-            min-width: 260px;
-            box-shadow: 0 2px 12px var(--light-mode-drop-shadow);
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            color: var(--light-mode-text-1);
-            font-weight: 400;
-        }
-
-        .email-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            border: 1.5px solid var(--light-mode-outline);
-            font-size: 0.95rem;
-            outline: none;
-            background: var(--light-mode-bg-inner);
-            display: none;
-        }
-
-        .email-input:focus { border-color: var(--accent); }
-
-        .btn {
-            width: 100%;
-            background: var(--accent);
-            color: var(--light-mode-bg-inner);
-            border: none;
-            border-radius: 10px;
-            padding: 0.85rem 1.5rem;
-            font-size: 1.05rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .btn:hover { filter: brightness(0.92); }
-        .btn:active { transform: scale(0.98); }
-
-        .success {
-            display: none;
-            text-align: center;
+            font-size: var(--text-size-2);
+            font-weight: var(--font-weight-medium);
             color: var(--light-mode-text-2);
-            font-size: 0.95rem;
+            font-family: var(--font-family),sans-serif;
+            /*color: var(--light-mode-text-2);*/
         }
+
 
         @media (max-width: 600px) {
             .page { flex-direction: column; }
@@ -126,24 +81,21 @@
     </style>
 </head>
 <body>
-<header> </header>
 <div class="page">
-    <div class="left">
-        <h1>your emails deserve to be better</h1>
-        <p class="tagline">Bopp - your ai agent emailer</p>
-        <ul>
-            <li>respond to emails in seconds</li>
-            <li>pick the best response</li>
-            <li>for all your emails</li>
-            <li>yes! all emails</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <p class="card-title">get Bopp</p>
-        <input class="email-input" type="email" id="email-input" placeholder="your@email.com" />
-        <button class="btn" id="signup-btn">Sign up</button>
-        <p class="success" id="success">You're on the list! ✉️</p>
+    <header class = "header">
+    </header>
+    <div class="content">
+        <div class="left">
+            <h1>your emails deserve to be better</h1>
+            <ul>
+                <li>respond to emails in seconds</li>
+                <li>pick the best response</li>
+                <li>for all your emails</li>
+                <li>yes! all emails</li>
+            </ul>
+        </div>
+        <div class="container">
+        </div>
     </div>
 </div>
 

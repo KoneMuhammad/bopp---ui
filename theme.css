@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 :root {
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-weight-medium: 300;
+    --font-weight-bold: 700;
     /* Backgrounds - light mode */
     --light-mode-bg:         #E6E6E6;
     --light-mode-bg-element: #F2F2F2;
@@ -13,8 +19,8 @@
     --light-mode-text-3: #666666;
 
     /* Text Size - light mode */
-    --text-size-1: 68px;
-    --text-size-2: 64px;
+    --text-size-1: 40px;
+    --text-size-2: 37px;
 
     /* dropshadow - light mode */
     --light-mode-drop-shadow: #CCCCCC;
@@ -22,4 +28,5 @@
     /* full outline - light mode */
     --light-mode-outline:         #E6E6E6;
     --light-mode-outline_top:     #FFFFFF;
+    
 }
