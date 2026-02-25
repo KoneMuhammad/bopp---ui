@@ -470,7 +470,7 @@
     <div class="nav-right">
         <a href="#" class="nav-link">Docs</a>
         <a href="#" class="nav-link">Pricing</a>
-        <button class="btn-primary">Sign up free</button>
+        <button class="btn-primary" onclick="goToConnect()">Sign up free</button>
     </div>
 </nav>
 
@@ -505,7 +505,8 @@
         </div>
 
         <div class="hero-ctas">
-            <button class="btn-large">Get started free →</button>
+            <button class="btn-large" onclick="goToConnect()">Get started free →</button>
+
             <a href="#" class="link-secondary">See how it works ↗</a>
         </div>
     </div>
@@ -546,6 +547,7 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                     Send
                 </button>
+
             </div>
         </div>
     </div>
@@ -570,6 +572,20 @@
     </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Make AI reply cards interactive
-    document.querySelectorAll('.ai-reply')
+<script>
+    document.querySelectorAll('.ai-reply').forEach(el => {
+        el.addEventListener('click', () => {
+            document.querySelectorAll('.ai-reply').forEach(r => r.classList.remove('selected'));
+            el.classList.add('selected');
+        });
+    });
+
+    function goToConnect() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.2s ease';
+        setTimeout(() => { window.location.href = 'emailconnect.html'; }, 200);
+    }
+</script>
+
+</body>
+</html>
