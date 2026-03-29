@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React User Selection Example</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .option { padding: 10px 20px; border: 1px solid #000; cursor: pointer; display: inline-block; margin-right: 10px; }
+        .selected { background-color: #2795D0; color: white; }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const { usestate } = React;
+
+    function App() {
+        const [selectedIndex, setSelectedIndex] = usestate(null);
+        const options = ["Option 1", "Option 2", "Option 3"];
+
+        return (
+            <div>
+                <h2>Select an option:</h2>
+                <div>
+                    {options.map((option, index) => (
+                        <div
+                            key={index}
+                            className={`option ${selectedIndex === index ? "selected" : ""}`}
+                            onClick={() => setSelectedIndex(index)}
+                        >
+                            {option}
+                        </div>
+                    ))}
+                </div>
+                {selectedIndex !== null && <p>You selected: {options[selectedIndex]}</p>}
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+
+</body>
+</html>
